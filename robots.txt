@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stevenyu0709-stack.github.io/discord-emoji-resizer/sitemap.xml
