@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Twitch Emote Resizer — Resize Image to 112x112 (Under 256KB) Free</title>
+  <meta name="description" content="Free Twitch emote resizer. Instantly resize any image to 112x112 pixels for Twitch emotes and keep it under the size limit. No upload, no signup, works in your browser." />
+  <meta name="keywords" content="twitch emote resizer, resize image 112x112, twitch emote size, twitch emote maker, twitch sub emote size" />
+  <link rel="canonical" href="https://stevenyu0709-stack.github.io/discord-emoji-resizer/twitch-emote-resizer/" />
+
+  <meta property="og:title" content="Twitch Emote Resizer — Resize Image to 112x112 Free" />
+  <meta property="og:description" content="Resize any image to Twitch's 112x112 emote size, kept under the limit. Free, private, instant." />
+  <meta property="og:type" content="website" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Twitch Emote Resizer",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any (web browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Free tool to resize any image to Twitch's 112x112 emote size."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What size should a Twitch emote be?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Twitch emotes should be uploaded at 112x112 pixels. Twitch automatically creates the smaller 56x56 and 28x28 versions. This tool resizes any image to exactly 112x112." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this Twitch emote resizer free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, it is completely free with no signup. All processing happens in your browser, so your images are never uploaded to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0e0a17;
+      --card: #1c1428;
+      --accent: #9146FF; /* Twitch purple */
+      --accent-hover: #772ce8;
+      --text: #e8eaf0;
+      --muted: #9aa0b4;
+      --border: #2e2440;
+      --ok: #3ba55d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    header { text-align: center; padding: 48px 20px 24px; }
+    header h1 { font-size: 2rem; margin-bottom: 8px; }
+    header p { color: var(--muted); max-width: 600px; margin: 0 auto; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 20px 60px; }
+    .nav { text-align:center; padding: 16px; font-size:.9rem; }
+    .nav a { color: var(--muted); text-decoration:none; margin:0 10px; }
+    .nav a:hover { color: var(--accent); }
+    #drop { border: 2px dashed var(--border); border-radius: 16px; background: var(--card); padding: 48px 24px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; }
+    #drop.drag { border-color: var(--accent); background: #20243240; }
+    #drop strong { color: var(--accent); }
+    #drop small { color: var(--muted); display: block; margin-top: 8px; }
+    #fileInput { display: none; }
+    #result { display: none; margin-top: 28px; text-align: center; }
+    .preview-row { display: flex; gap: 24px; justify-content: center; align-items: flex-end; flex-wrap: wrap; margin-bottom: 24px; }
+    .preview-box { text-align: center; }
+    .preview-box canvas { border-radius: 12px; border: 1px solid var(--border); background: #222 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="10" height="10" fill="%23333"/><rect x="10" y="10" width="10" height="10" fill="%23333"/></svg>'); }
+    .preview-box .label { color: var(--muted); font-size: .85rem; margin-top: 8px; }
+    .size-ok { color: var(--ok); font-weight: 600; }
+    .controls { margin: 16px 0; }
+    button.primary { background: var(--accent); color: #fff; border: none; padding: 14px 28px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s; }
+    button.primary:hover { background: var(--accent-hover); }
+    button.secondary { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: 12px 20px; border-radius: 10px; cursor: pointer; margin-left: 8px; }
+    button.secondary:hover { color: var(--text); border-color: var(--accent); }
+    .ad-slot { margin: 32px auto; max-width: 720px; min-height: 90px; border: 1px dashed var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #565c70; font-size: .8rem; }
+    .content { margin-top: 56px; }
+    .content h2 { font-size: 1.4rem; margin: 32px 0 12px; }
+    .content h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+    .content p, .content li { color: var(--muted); margin-bottom: 10px; }
+    .content ul, .content ol { padding-left: 22px; }
+    .content table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .content th, .content td { border: 1px solid var(--border); padding: 10px; text-align: left; }
+    .content th { background: var(--card); color: var(--text); }
+    footer { text-align: center; padding: 40px 20px; color: #565c70; border-top: 1px solid var(--border); font-size: .85rem; }
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <a href="../">Discord Emoji</a> ·
+    <a href="../twitch-emote-resizer/">Twitch Emote</a> ·
+    <a href="../discord-sticker-maker/">Discord Sticker</a> ·
+    <a href="../discord-banner-resizer/">Discord Banner</a>
+  </div>
+
+  <header>
+    <h1>Twitch Emote Resizer</h1>
+    <p>Resize any image to the perfect <strong>112&times;112</strong> Twitch emote size and keep it under the upload limit — instantly, free, and 100% private.</p>
+  </header>
+
+  <div class="container">
+    <div class="ad-slot">Ad space (AdSense goes here after approval)</div>
+
+    <div id="drop">
+      <p>📤 <strong>Click to upload</strong> or drag &amp; drop an image here</p>
+      <small>PNG, JPG, GIF, or WebP — your file never leaves your device</small>
+      <input type="file" id="fileInput" accept="image/*" />
+    </div>
+
+    <div id="result">
+      <div class="preview-row">
+        <div class="preview-box">
+          <canvas id="canvas" width="112" height="112"></canvas>
+          <div class="label">112 &times; 112 preview</div>
+        </div>
+      </div>
+      <div class="controls"><p id="sizeInfo"></p></div>
+      <button class="primary" id="downloadBtn">⬇ Download Emote (PNG)</button>
+      <button class="secondary" id="resetBtn">Try another image</button>
+    </div>
+
+    <div class="ad-slot">Ad space</div>
+
+    <div class="content">
+      <h2>How to resize an image for a Twitch emote</h2>
+      <ol>
+        <li>Click the upload box above (or drag your image onto it).</li>
+        <li>The tool instantly resizes it to <strong>112&times;112 pixels</strong> — the size Twitch uses for emotes.</li>
+        <li>It automatically compresses the file to stay under Twitch's upload limit.</li>
+        <li>Click <strong>Download Emote</strong> and upload it in your Twitch creator dashboard.</li>
+      </ol>
+
+      <h2>What size are Twitch emotes?</h2>
+      <p>Twitch asks creators to upload emotes at <strong>112&times;112 pixels</strong>. Twitch then automatically generates the smaller <strong>56&times;56</strong> and <strong>28&times;28</strong> versions used in chat. Upload at 112&times;112 for the best quality.</p>
+
+      <h2>Twitch image size cheat sheet</h2>
+      <table>
+        <tr><th>Asset</th><th>Recommended size</th></tr>
+        <tr><td>Emote (upload)</td><td>112 &times; 112 px</td></tr>
+        <tr><td>Sub badge</td><td>72 &times; 72 px</td></tr>
+        <tr><td>Profile picture</td><td>256 &times; 256 px</td></tr>
+        <tr><td>Profile banner</td><td>1200 &times; 480 px</td></tr>
+      </table>
+
+      <h2>Frequently asked questions</h2>
+      <h3>Is this Twitch emote resizer free?</h3>
+      <p>Yes — completely free, no signup, no watermark. Everything runs in your browser, so your images are never uploaded to any server.</p>
+      <h3>Can I use animated GIFs?</h3>
+      <p>This version resizes the first frame to a static PNG. Animated emote support is coming soon.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Made for the Twitch community. Your images stay on your device — nothing is uploaded.</p>
+    <p style="margin-top:8px;">&copy; 2026 · Not affiliated with Twitch.</p>
+  </footer>
+
+  <script>
+    const drop = document.getElementById('drop');
+    const fileInput = document.getElementById('fileInput');
+    const result = document.getElementById('result');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const sizeInfo = document.getElementById('sizeInfo');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    const TARGET = 112;
+    const MAX_BYTES = 256 * 1024;
+    let finalBlob = null;
+
+    drop.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
+    ['dragover','dragenter'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('drag'); }));
+    ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('drag'); }));
+    drop.addEventListener('drop', e => { if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+
+    function handleFile(file) {
+      if (!file.type.startsWith('image/')) { alert('Please choose an image file (PNG, JPG, GIF, or WebP).'); return; }
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0, 0, TARGET, TARGET);
+        const scale = Math.min(TARGET / img.width, TARGET / img.height);
+        const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+        const x = Math.round((TARGET - w) / 2), y = Math.round((TARGET - h) / 2);
+        ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, x, y, w, h);
+        compressToLimit();
+        drop.style.display = 'none'; result.style.display = 'block';
+      };
+      img.onerror = () => alert('Could not read that image. Try a different file.');
+      img.src = URL.createObjectURL(file);
+    }
+
+    function compressToLimit() {
+      canvas.toBlob(pngBlob => {
+        if (pngBlob && pngBlob.size <= MAX_BYTES) { finalBlob = pngBlob; showSize(pngBlob, 'PNG'); return; }
+        const tmp = document.createElement('canvas'); tmp.width = TARGET; tmp.height = TARGET;
+        const tctx = tmp.getContext('2d'); tctx.fillStyle = '#ffffff'; tctx.fillRect(0, 0, TARGET, TARGET); tctx.drawImage(canvas, 0, 0);
+        let q = 0.92;
+        const tryJpeg = () => {
+          tmp.toBlob(b => {
+            if (b && (b.size <= MAX_BYTES || q <= 0.4)) { finalBlob = b; showSize(b, 'JPG'); }
+            else { q -= 0.1; tryJpeg(); }
+          }, 'image/jpeg', q);
+        };
+        tryJpeg();
+      }, 'image/png');
+    }
+
+    function showSize(blob, fmt) {
+      const kb = (blob.size / 1024).toFixed(1);
+      const ok = blob.size <= MAX_BYTES;
+      sizeInfo.innerHTML = `Output: <strong>112 &times; 112</strong> · ${fmt} · <span class="${ok ? 'size-ok' : ''}">${kb} KB ${ok ? '✓ under limit' : ''}</span>`;
+      downloadBtn.dataset.ext = fmt.toLowerCase() === 'jpg' ? 'jpg' : 'png';
+    }
+
+    downloadBtn.addEventListener('click', () => {
+      if (!finalBlob) return;
+      const ext = downloadBtn.dataset.ext || 'png';
+      const a = document.createElement('a'); a.href = URL.createObjectURL(finalBlob);
+      a.download = `twitch-emote-112x112.${ext}`; a.click(); URL.revokeObjectURL(a.href);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      finalBlob = null; fileInput.value = '';
+      result.style.display = 'none'; drop.style.display = 'block';
+      ctx.clearRect(0, 0, TARGET, TARGET);
+    });
+  </script>
+</body>
+</html>
